@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const express = require('express');
 const helmet = require('helmet');
 const compression = require('compression');
@@ -9,10 +10,19 @@ const morgan = require('./config/morgan');
 const { jwtStrategy } = require('./config/passport');
 const { authLimiter } = require('./middlewares/rateLimiter');
 const routes = require('./routes/v0');
+const { sequelize } = require("./models");
 const { errorConverter, errorHandler } = require('./middlewares/error');
 const ApiError = require('./utils/ApiError');
 
 const app = express();
+
+sequelize.sync({ force: false })
+    .then(() => {
+        console.log(chalk.blue("Success: DB Connected"));
+    })
+    .catch((err) => {
+        console.error(err);
+    });
 
 if (config.env !== 'test') {
     app.use(morgan.successHandler);

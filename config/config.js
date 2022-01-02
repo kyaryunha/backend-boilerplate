@@ -26,21 +26,21 @@ if (error) {
 const envSettings = {
   "development": {
     "username": "root",
-    "password": null,
+    "password": 'kyaryunha',
     "database": "backend_development",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": 'kyaryunha',
     "database": "backend_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": null,
+    "password": 'kyaryunha',
     "database": "backend_production",
     "host": "127.0.0.1",
     "dialect": "mysql"

@@ -6,9 +6,8 @@ class User extends Model {
     static init(sequelize, DataTypes) {
         super.init({
             id: {
-                type: DataTypes.INTEGER.UNSIGNED,
+                type: DataTypes.STRING(36),
                 primaryKey: true,
-                autoIncrement: true
             },
             name: {
                 type: DataTypes.STRING(36),

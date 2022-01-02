@@ -1,15 +1,16 @@
 const httpStatus = require('http-status');
-const { User } = require('../../models');
+const db = require('../../models');
+const { User } = db;
 const ApiError = require('../../utils/ApiError');
 
 
 /**
  * Get user by id
- * @param {string} id
+ * @param {string} userId
  * @returns {Promise<User>}
  */
-const getUserById = async (id) => {
-  return User.findById(id);
+const getUserById = async (userId) => {
+  return User.findByPk(userId);
 };
 
 /**
@@ -19,8 +20,8 @@ const getUserById = async (id) => {
  */
 const createUser = async (userBody) => {
   const user = await getUserById(userBody.id);
-  if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  if (user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User Already Exists');
   }
   return User.create(userBody);
 };

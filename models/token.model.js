@@ -7,7 +7,7 @@ class Token extends Model {
     static init(sequelize, DataTypes) {
         super.init({
             token: {
-                type: DataTypes.STRING(128),
+                type: DataTypes.STRING(256),
                 required: true,
                 index: true,
             },
@@ -23,10 +23,6 @@ class Token extends Model {
             expires: {
                 type: DataTypes.DATE,
                 required: true,
-            },
-            blacklisted: {
-                type: DataTypes.BOOLEAN,
-                default: false,
             },
         }, {
             sequelize,
