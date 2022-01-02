@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const bcrypt = require('bcrypt');
 const db = require('../../models');
 const { User } = db;
 const ApiError = require('../../utils/ApiError');
@@ -23,6 +24,7 @@ const createUser = async (userBody) => {
   if (user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User Already Exists');
   }
+  userBody.password = await bcrypt.hash(userBody.password, 8);
   return User.create(userBody);
 };
 

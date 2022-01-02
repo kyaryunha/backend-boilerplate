@@ -1,8 +1,14 @@
 const { Model } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 class User extends Model {
     static associate(_models) {
     }
+    isPasswordMatch = async function (password) {
+        const user = this;
+        console.log(password, user.password)
+        return bcrypt.compare(password, user.password);
+    };
     static init(sequelize, DataTypes) {
         super.init({
             id: {
@@ -15,7 +21,7 @@ class User extends Model {
                 trim: true,
             },
             password: {
-                type: DataTypes.STRING(36),
+                type: DataTypes.STRING(256),
                 required: true,
                 trim: true,
                 minlength: 8,
