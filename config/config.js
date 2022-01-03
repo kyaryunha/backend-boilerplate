@@ -25,25 +25,25 @@ if (error) {
 
 const envSettings = {
   "development": {
-    "username": "root",
-    "password": 'kyaryunha',
-    "database": "backend_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": envVars.DB_USERNAME_DEVELOPMENT,
+    "password": envVars.DB_PASSWORD_DEVELOPMENT,
+    "database": envVars.DB_DATABASE_DEVELOPMENT,
+    "host": envVars.DB_HOST_DEVELOPMENT,
+    "dialect": envVars.DB_DIALECT_DEVELOPMENT
   },
   "test": {
-    "username": "root",
-    "password": 'kyaryunha',
-    "database": "backend_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": envVars.DB_USERNAME_TEST,
+    "password": envVars.DB_PASSWORD_TEST,
+    "database": envVars.DB_DATABASE_TEST,
+    "host": envVars.DB_HOST_TEST,
+    "dialect": envVars.DB_DIALECT_TEST
   },
   "production": {
-    "username": "root",
-    "password": 'kyaryunha',
-    "database": "backend_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": envVars.DB_USERNAME_PRODUCTION,
+    "password": envVars.DB_PASSWORD_PRODUCTION,
+    "database": envVars.DB_DATABASE_PRODUCTION,
+    "host": envVars.DB_HOST_PRODUCTION,
+    "dialect": envVars.DB_DIALECT_PRODUCTION
   }
 };
 

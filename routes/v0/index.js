@@ -27,6 +27,9 @@ const devRoutes = [
 ];
 
 defaultRoutes.forEach((route) => {
+    // v0
+    router.use('/v0'+route.path, route.route);
+    // latest
     router.use(route.path, route.route);
 });
 

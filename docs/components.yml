@@ -5,19 +5,11 @@ components:
       properties:
         id:
           type: string
-        email:
-          type: string
-          format: email
         name:
           type: string
-        role:
-          type: string
-          enum: [user, admin]
       example:
         id: 5ebac534954b54139806c112
-        email: fake@example.com
         name: fake name
-        role: user
 
     Token:
       type: object
@@ -48,15 +40,6 @@ components:
           type: string
 
   responses:
-    DuplicateEmail:
-      description: Email already taken
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          example:
-            code: 400
-            message: Email already taken
     Unauthorized:
       description: Unauthorized
       content:
