@@ -6,9 +6,11 @@ const {
 } = require('../../../utils/test/testTools');
 const { dbConnect, dbClose } = require('../../../utils/dbConnect');
 
-describe('GET /me main.test.js', () => {
-  let user; let
-    userToken;
+const path = '/me';
+
+describe(`GET ${path}`, () => {
+  let user;
+  let userToken;
   beforeAll(async () => {
     await dbConnect(true);
     user = await createUser({});
@@ -19,13 +21,13 @@ describe('GET /me main.test.js', () => {
   });
   test('로그인 안한 유저 접근시 401', async () => {
     await request(app)
-      .get('/me')
+      .get(path)
       .expect('Content-Type', /json/)
       .expect(401);
   });
   test('로그인 한 유저 접근시 200', async () => {
     await request(app)
-      .get('/me')
+      .get(path)
       .set('Authorization', `Bearer ${userToken.access.token}`)
       .expect('Content-Type', /json/)
       .expect(200);

@@ -1,7 +1,7 @@
 const app = require('./app');
 const config = require('./config/config');
 const logger = require('./config/logger');
-const { dbConnect } = require('../../utils/dbConnect');
+const { dbConnect } = require('./utils/dbConnect');
 
 dbConnect();
 
