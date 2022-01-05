@@ -3,15 +3,9 @@ const app = require('./app');
 const { sequelize } = require("./models");
 const config = require('./config/config');
 const logger = require('./config/logger');
+const { dbConnect } = require('../../utils/dbConnect');
 
-
-sequelize.sync({ force: false })
-    .then(() => {
-        console.log(chalk.blue("Success: DB Connected"));
-    })
-    .catch((err) => {
-        console.error(err);
-    });
+dbConnect();
 
 let server;
 server = app.listen(config.port, () => {
