@@ -30,14 +30,14 @@ const getUser = catchAsync(async (req, res) => {
 });
 
 const updateUser = catchAsync(async (req, res) => {
-  const user = await userService.updateUserById(req.params.userId, req.body);
+  const user = await userService.updateUserById(req.user, req.params.userId, req.body);
   res.json({
     user: userService.filterUserData(user),
   });
 });
 
 const deleteUser = catchAsync(async (req, res) => {
-  await userService.deleteUserById(req.params.userId);
+  await userService.deleteUserById(req.user, req.params.userId);
   res.status(httpStatus.NO_CONTENT).send();
 });
 

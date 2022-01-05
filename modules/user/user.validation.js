@@ -28,7 +28,8 @@ const updateUser = {
   }),
   body: Joi.object()
     .keys({
-      password: Joi.string().custom(customValidation.password),
+      name: Joi.string(),
+      // password: Joi.string().custom(customValidation.password),
     })
     .min(1),
 };

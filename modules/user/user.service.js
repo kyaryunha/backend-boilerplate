@@ -28,10 +28,10 @@ const createUser = async (userBody) => {
 };
 
 /**
- * Query for users
+ * List for users
  * @param {string} [sortBy] - Sort option in the format: sortField:(desc|asc)
- * @param {number} [limit] - Maximum number of results per page (default = 10)
- *  @param {number} [offset] - Maximum number of results per page (default = 10)
+ * @param {number} [limit] - Maximum number of results per page (default = 100)
+ *  @param {number} [offset] - Offset of results per page (default = 0)
  * @returns {Promise<User[]>}
  */
 const getUsers = async ({ sortBy, limit, offset }) => {
@@ -44,14 +44,18 @@ const getUsers = async ({ sortBy, limit, offset }) => {
 
 /**
  * Update user by id
+ * @param {Object} requestUser
  * @param {string} userId
  * @param {Object} updateBody
  * @returns {Promise<User>}
  */
-const updateUserById = async (userId, updateBody) => {
+const updateUserById = async (requestUser, userId, updateBody) => {
   const user = await getUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  if (requestUser.id !== userId) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
   }
   Object.assign(user, updateBody);
   await user.save();
@@ -60,13 +64,17 @@ const updateUserById = async (userId, updateBody) => {
 
 /**
  * Delete user by id
+ * @param {Object} requestUser
  * @param {string} userId
  * @returns {Promise<User>}
  */
-const deleteUserById = async (userId) => {
+const deleteUserById = async (requestUser, userId) => {
   const user = await getUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  if (requestUser.id !== userId) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
   }
   await user.remove();
   return user;
