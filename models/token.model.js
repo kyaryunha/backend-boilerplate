@@ -3,17 +3,18 @@ const { tokenTypes } = require('../config/tokens');
 
 class Token extends Model {
   static associate(_models) {
+    this.belongsTo(_models.User, {
+      foreignKey: {
+        allowNull: false,
+        name: 'userId',
+      },
+    });
   }
 
   static init(sequelize, DataTypes) {
     super.init({
       token: {
         type: DataTypes.STRING(256),
-        required: true,
-        index: true,
-      },
-      userId: {
-        type: DataTypes.INTEGER.UNSIGNED,
         required: true,
       },
       type: {

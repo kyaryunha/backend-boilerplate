@@ -3,6 +3,14 @@ const bcrypt = require('bcrypt');
 
 class User extends Model {
   static associate(_models) {
+    this.hasMany(_models.Token, {
+      foreignKey: {
+        allowNull: false,
+        name: 'userId',
+      },
+      onUpdate: 'CASCADE',
+      sourceKey: 'id',
+    });
   }
 
   isPasswordMatch(password) {

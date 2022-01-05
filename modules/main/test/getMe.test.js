@@ -4,7 +4,7 @@ const {
   createUser,
   getLoginTokens,
 } = require('../../../utils/test/testTools');
-const { dbConnect, dbClose } = require('../../../utils/dbConnect');
+const { dbConnectForTest, dbClose } = require('../../../utils/dbConnect');
 
 const path = '/me';
 
@@ -12,7 +12,7 @@ describe(`GET ${path}`, () => {
   let user;
   let userToken;
   beforeAll(async () => {
-    await dbConnect(true);
+    await dbConnectForTest(true);
     user = await createUser({});
     userToken = await getLoginTokens(user);
   });

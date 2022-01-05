@@ -1,12 +1,12 @@
 const request = require('supertest');
 const app = require('../../../app');
-const { dbConnect, dbClose } = require('../../../utils/dbConnect');
+const { dbConnectForTest, dbClose } = require('../../../utils/dbConnect');
 
 const path = '/auth/register';
 
 describe(`POST ${path}`, () => {
   beforeAll(async () => {
-    await dbConnect(true);
+    await dbConnectForTest(true);
   });
   afterAll(async () => {
     await dbClose();
@@ -21,7 +21,7 @@ describe(`POST ${path}`, () => {
       .expect('Content-Type', /json/)
       .expect(400);
   });
-  test('name 가 없을 시 200', async () => {
+  test('name 가 없을 시 400', async () => {
     await request(app)
       .post(path)
       .send({
@@ -31,7 +31,7 @@ describe(`POST ${path}`, () => {
       .expect('Content-Type', /json/)
       .expect(400);
   });
-  test('password 가 없을 시 200', async () => {
+  test('password 가 없을 시 400', async () => {
     await request(app)
       .post(path)
       .send({
@@ -52,7 +52,7 @@ describe(`POST ${path}`, () => {
       .expect('Content-Type', /json/)
       .expect(400);
   });
-  test('id, name, password 가 있을 시 200', async () => {
+  test('id, name, password 가 있을 시 201', async () => {
     await request(app)
       .post(path)
       .send({
