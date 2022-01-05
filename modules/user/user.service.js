@@ -1,18 +1,16 @@
 const httpStatus = require('http-status');
 const bcrypt = require('bcrypt');
 const db = require('../../models');
+
 const { User } = db;
 const ApiError = require('../../utils/ApiError');
-
 
 /**
  * Get user by id
  * @param {string} userId
  * @returns {Promise<User>}
  */
-const getUserById = async (userId) => {
-  return User.findByPk(userId);
-};
+const getUserById = async (userId) => User.findByPk(userId);
 
 /**
  * Create a user
@@ -24,6 +22,7 @@ const createUser = async (userBody) => {
   if (user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User Already Exists');
   }
+  // eslint-disable-next-line no-param-reassign
   userBody.password = await bcrypt.hash(userBody.password, 8);
   return User.create(userBody);
 };
@@ -41,7 +40,6 @@ const queryUsers = async (filter, options) => {
   const users = await User.paginate(filter, options);
   return users;
 };
-
 
 /**
  * Update user by id

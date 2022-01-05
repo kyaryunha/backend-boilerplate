@@ -3,8 +3,8 @@ const { Token } = require('../../models');
 const ApiError = require('../../utils/ApiError');
 // const { tokenService } = require("../services");
 // const { userService } = require("../services");
-const tokenService = require("../token/token.service");
-const userService = require("../user/user.service");
+const tokenService = require('../token/token.service');
+const userService = require('../user/user.service');
 const { tokenTypes } = require('../../config/tokens');
 
 /**
@@ -27,7 +27,7 @@ const loginUserWithIdAndPassword = async (id, password) => {
  * @returns {Promise}
  */
 const logout = async (refreshToken) => {
-  const refreshTokenDoc = await Token.findOne({ token: refreshToken, type: tokenTypes.REFRESH});
+  const refreshTokenDoc = await Token.findOne({ token: refreshToken, type: tokenTypes.REFRESH });
   if (!refreshTokenDoc) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Not found');
   }

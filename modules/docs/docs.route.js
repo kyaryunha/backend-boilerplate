@@ -6,16 +6,16 @@ const swaggerDefinition = require('../../docs/swaggerDef');
 const router = express.Router();
 
 const specs = swaggerJsdoc({
-    swaggerDefinition,
-    apis: ['../../docs/*.yml', '../../modules/**/*.js'],
+  swaggerDefinition,
+  apis: ['../../docs/*.yml', '../../modules/**/*.js'],
 });
 
 router.use('/', swaggerUi.serve);
 router.get(
-    '/',
-    swaggerUi.setup(specs, {
-        explorer: true,
-    })
+  '/',
+  swaggerUi.setup(specs, {
+    explorer: true,
+  }),
 );
 
 module.exports = router;

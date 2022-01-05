@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../../utils/catchAsync');
-const authService = require('../auth/auth.service');
+const authService = require('./auth.service');
 const tokenService = require('../token/token.service');
 const userService = require('../user/user.service');
 
