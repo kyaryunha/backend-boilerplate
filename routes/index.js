@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  mainRoute, authRoute, userRoute
+  mainRoute, authRoute, userRoute,
 } = require('../modules/routes');
 const config = require('../config/config');
 

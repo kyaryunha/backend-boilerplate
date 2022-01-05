@@ -57,6 +57,7 @@ describe(`POST ${path}`, () => {
     const resToken = res.body.tokens;
     expect(resUser.id).toBe(user.id);
     expect(resUser.name).toBe(user.name);
+    expect(resUser.password).toBeUndefined();
     expect(resToken).toBeDefined();
     expect(resToken.access).toBeDefined();
     expect(resToken.access.token).toBeDefined();

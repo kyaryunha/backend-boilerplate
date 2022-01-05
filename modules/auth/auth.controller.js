@@ -7,14 +7,14 @@ const userService = require('../user/user.service');
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
   const tokens = await tokenService.generateAuthTokens(user);
-  res.status(httpStatus.CREATED).send({ user, tokens });
+  res.status(httpStatus.CREATED).send({ user: userService.filterUserData(user), tokens });
 });
 
 const login = catchAsync(async (req, res) => {
   const { id, password } = req.body;
   const user = await authService.loginUserWithIdAndPassword(id, password);
   const tokens = await tokenService.generateAuthTokens(user);
-  res.send({ user, tokens });
+  res.send({ user: userService.filterUserData(user), tokens });
 });
 
 const logout = catchAsync(async (req, res) => {
@@ -24,7 +24,7 @@ const logout = catchAsync(async (req, res) => {
 
 const refreshTokens = catchAsync(async (req, res) => {
   const tokens = await authService.refreshAuth(req.body.refreshToken);
-  res.send({ tokens});
+  res.send({ tokens });
 });
 
 module.exports = {

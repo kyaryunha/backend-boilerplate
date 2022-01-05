@@ -65,5 +65,6 @@ describe(`POST ${path}`, () => {
     const resUser = res.body.user;
     expect(resUser.id).toBe('hello');
     expect(resUser.name).toBe('hello');
+    expect(resUser.password).toBeUndefined();
   });
 });

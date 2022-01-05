@@ -7,7 +7,7 @@ const userService = require('./user.service');
 const createUser = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
   res.status(httpStatus.CREATED).json({
-    user,
+    user: userService.filterUserData(user),
   });
 });
 
@@ -15,7 +15,7 @@ const getUsers = catchAsync(async (req, res) => {
   const options = pick(req.query, ['sortBy', 'limit', 'offset']);
   const users = await userService.getUsers(options);
   res.json({
-    users,
+    users: userService.filterUsersData(users),
   });
 });
 
@@ -25,14 +25,14 @@ const getUser = catchAsync(async (req, res) => {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
   res.json({
-    user,
+    user: userService.filterUserData(user),
   });
 });
 
 const updateUser = catchAsync(async (req, res) => {
   const user = await userService.updateUserById(req.params.userId, req.body);
   res.json({
-    user,
+    user: userService.filterUserData(user),
   });
 });
 

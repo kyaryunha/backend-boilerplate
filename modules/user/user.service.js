@@ -72,10 +72,20 @@ const deleteUserById = async (userId) => {
   return user;
 };
 
+const filterUserData = (user) => ({
+  id: user.id,
+  name: user.name,
+  createdAt: user.createdAt,
+});
+
+const filterUsersData = (users) => users.map((user) => filterUserData(user));
+
 module.exports = {
   createUser,
   getUsers,
   getUserById,
   updateUserById,
   deleteUserById,
+  filterUserData,
+  filterUsersData,
 };

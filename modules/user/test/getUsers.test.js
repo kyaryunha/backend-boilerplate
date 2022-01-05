@@ -37,6 +37,9 @@ describe(`GET ${path}`, () => {
       .expect(200);
     const resUsers = res.body.users;
     expect(resUsers.length).toBe(100);
+    for (let i = 0; i < resUsers - 1; i++) {
+      expect(resUsers[i].password).toBeUndefined();
+    }
   });
 
   test('[user] limit = 3 일 때 3개 데이터 반환 200', async () => {

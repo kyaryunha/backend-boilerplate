@@ -26,5 +26,6 @@ module.exports = {
     'global-require': 'off',
     'import/extensions': 'off',
     'consistent-return': 'off',
+    'max-len': 'off',
   },
 };
