@@ -2,10 +2,10 @@
   "name": "backend-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "npm start test"
+    "dev": "cross-env NODE_ENV=development nodemon server.js",
+    "test": "cross-env NODE_ENV=test jest"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "express-rate-limit": "^5.5.1",
     "helmet": "^4.6.0",
     "http-status": "^1.5.0",
+    "jest": "^27.4.6",
     "joi": "^17.5.0",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
@@ -35,6 +36,7 @@
     "passport-jwt": "^4.0.0",
     "sequelize": "^7.0.0-alpha.4",
     "sequelize-cli": "^6.3.0",
+    "supertest": "^6.1.6",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.3.0",
     "winston": "^3.3.3",

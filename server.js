@@ -1,6 +1,17 @@
+const chalk = require('chalk');
 const app = require('./app');
+const { sequelize } = require("./models");
 const config = require('./config/config');
 const logger = require('./config/logger');
+
+
+sequelize.sync({ force: false })
+    .then(() => {
+        console.log(chalk.blue("Success: DB Connected"));
+    })
+    .catch((err) => {
+        console.error(err);
+    });
 
 let server;
 server = app.listen(config.port, () => {

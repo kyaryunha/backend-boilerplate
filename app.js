@@ -16,14 +16,6 @@ const ApiError = require('./utils/ApiError');
 
 const app = express();
 
-sequelize.sync({ force: false })
-    .then(() => {
-        console.log(chalk.blue("Success: DB Connected"));
-    })
-    .catch((err) => {
-        console.error(err);
-    });
-
 if (config.env !== 'test') {
     app.use(morgan.successHandler);
     app.use(morgan.errorHandler);
@@ -50,9 +42,9 @@ app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);
 
 // limit repeated failed requests to auth endpoints
-if (config.env === 'production') {
-    app.use('/v0/auth', authLimiter);
-}
+// if (config.env === 'production') {
+//     app.use('/v0/auth', authLimiter);
+// }
 
 // v0 api routes
 app.use('/v0', routes);
