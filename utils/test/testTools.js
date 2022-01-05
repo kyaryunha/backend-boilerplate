@@ -12,11 +12,15 @@ function getRandomString(length) {
   return result;
 }
 
-const createUser = async ({ id, name, password }) => await userService.createUser({
-  id: id || `userid${getRandomString(4)}`,
-  name: name || `name${getRandomString(4)}`,
-  password: password || `pass${getRandomString(4)}`,
-});
+const createUser = async ({ id, name, password }) => {
+  const userBody = {
+    id: id || `userid${getRandomString(4)}`,
+    name: name || `name${getRandomString(4)}`,
+    password: password || `pass${getRandomString(4)}`,
+  };
+  await userService.createUser(userBody);
+  return userBody;
+};
 
 const getLoginTokens = async (user) => await tokenService.generateAuthTokens(user);
 

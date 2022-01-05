@@ -59,6 +59,7 @@ const envSettings = {
     password: envVars.DB_PASSWORD_TEST,
     database: envVars.DB_DATABASE_TEST,
     logging: false,
+    tables_prefix: '',
     host: envVars.DB_HOST_TEST,
     dialect: envVars.DB_DIALECT_TEST,
   },

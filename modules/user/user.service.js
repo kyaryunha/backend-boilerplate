@@ -22,9 +22,9 @@ const createUser = async (userBody) => {
   if (user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User Already Exists');
   }
-  // eslint-disable-next-line no-param-reassign
-  userBody.password = await bcrypt.hash(userBody.password, 8);
-  return User.create(userBody);
+  const userBody2 = { ...userBody };
+  userBody2.password = await bcrypt.hash(userBody2.password, 8);
+  return User.create(userBody2);
 };
 
 /**

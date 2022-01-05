@@ -26,10 +26,13 @@ describe(`GET ${path}`, () => {
       .expect(401);
   });
   test('로그인 한 유저 접근시 200', async () => {
-    await request(app)
+    const res = await request(app)
       .get(path)
       .set('Authorization', `Bearer ${userToken.access.token}`)
       .expect('Content-Type', /json/)
       .expect(200);
+    const resUser = res.body;
+    expect(resUser.id).toBe(user.id);
+    expect(resUser.name).toBe(user.name);
   });
 });

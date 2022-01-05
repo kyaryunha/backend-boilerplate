@@ -21,11 +21,11 @@ class User extends Model {
   static init(sequelize, DataTypes) {
     super.init({
       id: {
-        type: DataTypes.STRING(36),
+        type: DataTypes.STRING(32),
         primaryKey: true,
       },
       name: {
-        type: DataTypes.STRING(36),
+        type: DataTypes.STRING(32),
         required: true,
         trim: true,
       },
@@ -33,7 +33,6 @@ class User extends Model {
         type: DataTypes.STRING(256),
         required: true,
         trim: true,
-        minlength: 8,
         validate(value) {
           if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
             throw new Error('Password must contain at least one letter and one number');

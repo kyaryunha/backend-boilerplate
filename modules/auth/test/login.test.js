@@ -2,16 +2,15 @@ const request = require('supertest');
 const app = require('../../../app');
 const {
   createUser,
-  getLoginTokens,
 } = require('../../../utils/test/testTools');
-const { dbConnect, dbClose } = require('../../../utils/dbConnect');
+const { dbConnectForTest, dbClose } = require('../../../utils/dbConnect');
 
 const path = '/auth/login';
 
 describe(`POST ${path}`, () => {
   let user;
   beforeAll(async () => {
-    await dbConnect(true);
+    await dbConnectForTest(true);
     user = await createUser({});
   });
   afterAll(async () => {
@@ -46,7 +45,6 @@ describe(`POST ${path}`, () => {
       .expect(401);
   });
   test('id, password 가 맞을 시 200', async () => {
-    console.log(user);
     await request(app)
       .post(path)
       .send({

@@ -17,6 +17,9 @@ class Token extends Model {
         type: DataTypes.STRING(256),
         required: true,
       },
+      userId: {
+        type: DataTypes.STRING(32),
+      },
       type: {
         type: DataTypes.STRING(32),
         enum: [tokenTypes.REFRESH, tokenTypes.RESET_PASSWORD, tokenTypes.VERIFY_EMAIL],
