@@ -29,16 +29,17 @@ const createUser = async (userBody) => {
 
 /**
  * Query for users
- * @param {Object} filter - Mongo filter
- * @param {Object} options - Query options
- * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
- * @param {number} [options.limit] - Maximum number of results per page (default = 10)
- * @param {number} [options.page] - Current page (default = 1)
- * @returns {Promise<QueryResult>}
+ * @param {string} [sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [limit] - Maximum number of results per page (default = 10)
+ *  @param {number} [offset] - Maximum number of results per page (default = 10)
+ * @returns {Promise<User[]>}
  */
-const queryUsers = async (filter, options) => {
-  const users = await User.paginate(filter, options);
-  return users;
+const getUsers = async ({ sortBy, limit, offset }) => {
+  const options = {};
+  if (sortBy) options.order = [[sortBy, 'ASC']];
+  options.limit = limit || 100;
+  options.offset = offset || 0;
+  return await User.findAll(options);
 };
 
 /**
@@ -73,7 +74,7 @@ const deleteUserById = async (userId) => {
 
 module.exports = {
   createUser,
-  queryUsers,
+  getUsers,
   getUserById,
   updateUserById,
   deleteUserById,
