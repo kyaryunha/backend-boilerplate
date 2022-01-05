@@ -45,7 +45,7 @@ describe(`POST ${path}`, () => {
       .expect(401);
   });
   test('id, password 가 맞을 시 200', async () => {
-    await request(app)
+    const res = await request(app)
       .post(path)
       .send({
         id: user.id,
@@ -53,5 +53,16 @@ describe(`POST ${path}`, () => {
       })
       .expect('Content-Type', /json/)
       .expect(200);
+    const resUser = res.body.user;
+    const resToken = res.body.tokens;
+    expect(resUser.id).toBe(user.id);
+    expect(resUser.name).toBe(user.name);
+    expect(resToken).toBeDefined();
+    expect(resToken.access).toBeDefined();
+    expect(resToken.access.token).toBeDefined();
+    expect(resToken.access.expires).toBeDefined();
+    expect(resToken.refresh).toBeDefined();
+    expect(resToken.refresh.token).toBeDefined();
+    expect(resToken.refresh.expires).toBeDefined();
   });
 });

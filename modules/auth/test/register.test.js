@@ -53,7 +53,7 @@ describe(`POST ${path}`, () => {
       .expect(400);
   });
   test('id, name, password 가 있을 시 201', async () => {
-    await request(app)
+    const res = await request(app)
       .post(path)
       .send({
         id: 'hello',
@@ -62,5 +62,8 @@ describe(`POST ${path}`, () => {
       })
       .expect('Content-Type', /json/)
       .expect(201);
+    const resUser = res.body.user;
+    expect(resUser.id).toBe('hello');
+    expect(resUser.name).toBe('hello');
   });
 });

@@ -7,7 +7,9 @@ const getHello = catchAsync(async (req, res) => {
 });
 
 const getMe = catchAsync(async (req, res) => {
-  res.json(req.user);
+  res.json({
+    user: req.user,
+  });
 });
 
 module.exports = {

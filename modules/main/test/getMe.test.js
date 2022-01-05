@@ -31,7 +31,7 @@ describe(`GET ${path}`, () => {
       .set('Authorization', `Bearer ${userToken.access.token}`)
       .expect('Content-Type', /json/)
       .expect(200);
-    const resUser = res.body;
+    const resUser = res.body.user;
     expect(resUser.id).toBe(user.id);
     expect(resUser.name).toBe(user.name);
   });
