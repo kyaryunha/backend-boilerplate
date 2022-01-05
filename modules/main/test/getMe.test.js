@@ -25,7 +25,7 @@ describe(`GET ${path}`, () => {
       .expect('Content-Type', /json/)
       .expect(401);
   });
-  test('로그인 한 유저 접근시 200', async () => {
+  test('[user] 로그인 한 유저 접근시 200', async () => {
     const res = await request(app)
       .get(path)
       .set('Authorization', `Bearer ${userToken.access.token}`)
