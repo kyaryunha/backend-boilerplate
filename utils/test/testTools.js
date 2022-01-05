@@ -14,9 +14,9 @@ function getRandomString(length) {
 
 const createUser = async ({ id, name, password }) => {
   const userBody = {
-    id: id || `userid${getRandomString(4)}`,
-    name: name || `name${getRandomString(4)}`,
-    password: password || `pass${getRandomString(4)}`,
+    id: id || `userid${getRandomString(10)}`,
+    name: name || `name${getRandomString(10)}`,
+    password: password || `pass${getRandomString(10)}`,
   };
   await userService.createUser(userBody);
   return userBody;

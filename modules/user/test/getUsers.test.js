@@ -29,13 +29,14 @@ describe(`GET ${path}`, () => {
       .expect('Content-Type', /json/)
       .expect(401);
   });
-  test('[user] 로그인 한 유저 접근시 200', async () => {
+  test('[user] 아무런 쿼리가 없을 시, 100개 데이터 반환 200', async () => {
     const res = await request(app)
       .get(path)
       .set('Authorization', `Bearer ${userToken.access.token}`)
       .expect('Content-Type', /json/)
       .expect(200);
     const resUsers = res.body.users;
+    expect(resUsers.length).toBe(100);
   });
 
   test('[user] limit = 3 일 때 3개 데이터 반환 200', async () => {
@@ -49,5 +50,20 @@ describe(`GET ${path}`, () => {
       .expect(200);
     const resUsers = res.body.users;
     expect(resUsers.length).toBe(3);
+  });
+
+  test('[user] sortBy = name 일 때 name 순 ASC 정렬 200', async () => {
+    const res = await request(app)
+      .get(path)
+      .query({
+        sortBy: 'name',
+      })
+      .set('Authorization', `Bearer ${userToken.access.token}`)
+      .expect('Content-Type', /json/)
+      .expect(200);
+    const resUsers = res.body.users;
+    for (let i = 0; i < resUsers - 1; i++) {
+      expect(resUsers[i].name <= resUsers[i + 1].name).toBeTruthy();
+    }
   });
 });
