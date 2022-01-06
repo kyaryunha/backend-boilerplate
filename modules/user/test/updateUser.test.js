@@ -25,9 +25,6 @@ describe(`GET ${path}`, () => {
     await dbClose();
   });
   test('로그인 안한 유저 접근시 401', async () => {
-    console.log(getPath(path, {
-      userId: users[0].id,
-    }));
     await request(app)
       .patch(getPath(path, {
         userId: users[0].id,

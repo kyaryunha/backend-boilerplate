@@ -9,6 +9,7 @@ class User extends Model {
         name: 'userId',
       },
       onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
       sourceKey: 'id',
     });
   }

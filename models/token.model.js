@@ -8,6 +8,8 @@ class Token extends Model {
         allowNull: false,
         name: 'userId',
       },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
     });
   }
 

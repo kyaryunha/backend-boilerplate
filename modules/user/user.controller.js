@@ -4,13 +4,6 @@ const ApiError = require('../../utils/ApiError');
 const catchAsync = require('../../utils/catchAsync');
 const userService = require('./user.service');
 
-const createUser = catchAsync(async (req, res) => {
-  const user = await userService.createUser(req.body);
-  res.status(httpStatus.CREATED).json({
-    user: userService.filterUserData(user),
-  });
-});
-
 const getUsers = catchAsync(async (req, res) => {
   const options = pick(req.query, ['sortBy', 'limit', 'offset']);
   const users = await userService.getUsers(options);
@@ -36,15 +29,8 @@ const updateUser = catchAsync(async (req, res) => {
   });
 });
 
-const deleteUser = catchAsync(async (req, res) => {
-  await userService.deleteUserById(req.user, req.params.userId);
-  res.status(httpStatus.NO_CONTENT).send();
-});
-
 module.exports = {
-  createUser,
   getUsers,
   getUser,
   updateUser,
-  deleteUser,
 };

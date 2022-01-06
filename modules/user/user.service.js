@@ -2,7 +2,7 @@ const httpStatus = require('http-status');
 const bcrypt = require('bcrypt');
 const db = require('../../models');
 
-const { User } = db;
+const { User, sequelize } = db;
 const ApiError = require('../../utils/ApiError');
 
 /**
@@ -62,24 +62,6 @@ const updateUserById = async (requestUser, userId, updateBody) => {
   return user;
 };
 
-/**
- * Delete user by id
- * @param {Object} requestUser
- * @param {string} userId
- * @returns {Promise<User>}
- */
-const deleteUserById = async (requestUser, userId) => {
-  const user = await getUserById(userId);
-  if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
-  }
-  if (requestUser.id !== userId) {
-    throw new ApiError(httpStatus.FORBIDDEN, 'Forbidden');
-  }
-  await user.remove();
-  return user;
-};
-
 const filterUserData = (user) => ({
   id: user.id,
   name: user.name,
@@ -93,7 +75,6 @@ module.exports = {
   getUsers,
   getUserById,
   updateUserById,
-  deleteUserById,
   filterUserData,
   filterUsersData,
 };
