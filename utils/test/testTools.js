@@ -1,7 +1,7 @@
 const userService = require('../../modules/user/user.service');
 const tokenService = require('../../modules/token/token.service');
 
-function getRandomString(length) {
+const getRandomString = (length) => {
   let result = '';
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
@@ -10,7 +10,15 @@ function getRandomString(length) {
             * charactersLength));
   }
   return result;
-}
+};
+
+const getPath = (path, params) => {
+  let path2 = path;
+  Object.keys(params).forEach((key) => {
+    path2 = path2.replace(`:${key}`, params[key]);
+  });
+  return path2;
+};
 
 const createUser = async ({ id, name, password }) => {
   const userBody = {
@@ -25,6 +33,7 @@ const createUser = async ({ id, name, password }) => {
 const getLoginTokens = async (user) => await tokenService.generateAuthTokens(user);
 
 module.exports = {
+  getPath,
   createUser,
   getLoginTokens,
 };
